@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response} from '@angular/http';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map'
 import { SocketIoModule, SocketIoConfig, Socket} from 'ng-socket-io';
 
 @Injectable()
@@ -13,33 +14,26 @@ export class AppService {
     this.headers.append('Content-Type', 'application/json');
   }
 
+  join(name: any){
+    this.socket.emit("join", name);
+  }
+
   sendMessage(msg: any){
-    this.socket.emit("message", msg);
+    this.socket.emit("send", msg);
   }
 
   getMessage() {
       return this.socket
-          .fromEvent<any>("message")
-          .map(data => data.msg );
+        .fromEvent<any>("chat");
+  }
+
+  getUpdate() {
+    return this.socket
+      .fromEvent<any>("update");
   }
 
   close() {
     this.socket.disconnect()
-  }
-
-  msgPost(msg: any){
-
-    let body = {
-      mensagem: "oi",
-      livro: { id: 2 }
-    }
-
-    this.http
-    .post('http://localhost:3000/promocoes', JSON.stringify(body), { headers: this.headers })
-    .subscribe(res => {}, 
-      erro => {
-        console.log(erro);
-    });
   }
 
 }

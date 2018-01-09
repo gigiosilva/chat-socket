@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { HttpModule } from '@angular/http';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000/promocoes', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [

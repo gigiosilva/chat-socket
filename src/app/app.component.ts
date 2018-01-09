@@ -9,15 +9,27 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService) {
+    this.appService.getMessage().subscribe(data => console.log(data));
+    this.appService.getUpdate().subscribe(data => console.log(data));
+  }
 
   enviarTest() {
-    let livro = {
+    let aog = {
       titulo: "teste",
       descricao: "ata",
-      preco: 100
+      time: 100
     }
-    //this.appService.sendMessage(livro);
-    this.appService.msgPost(livro);
+
+    this.appService.sendMessage(JSON.stringify(aog));
+    //this.appService.msgPost(livro);
+  }
+
+  getTest() {
+    this.appService.getMessage().subscribe(data => console.log(data));
+  }
+
+  connect() {
+    this.appService.join("Giovani");
   }
 }
