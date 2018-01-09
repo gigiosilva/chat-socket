@@ -23,13 +23,11 @@ export class AppService {
   }
 
   getMessage() {
-      return this.socket
-        .fromEvent<any>("chat");
+    return this.socket.fromEvent<any>("chat");
   }
 
   getUpdate() {
-    return this.socket
-      .fromEvent<any>("update");
+    return this.socket.fromEvent<any>("update");
   }
 
   close() {
