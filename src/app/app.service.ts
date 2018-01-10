@@ -23,7 +23,7 @@ export class AppService {
   }
 
   getMessage() {
-    return this.socket.fromEvent<any>("chat");
+    return this.socket.fromEvent<any>("chat").map(data => JSON.parse(data));
   }
 
   getUpdate() {

@@ -8,12 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  chatMessages: Object[];
+  chatMessages: Object[] = [];
   messageText: string;
   username: string;
 
   constructor(private appService: AppService) {
-    this.appService.getMessage().subscribe(data => this.chatMessages.push(data));
+    this.appService.getMessage().subscribe(data => this.updateChat(data));
     this.appService.getUpdate().subscribe(data => console.log(data));
   }
 
@@ -25,12 +25,18 @@ export class AppComponent {
 
   sendMessage() {
 
-    this.appService.sendMessage(JSON.stringify(this.messageText));
+    this.appService.sendMessage(this.messageText);
+    this.updateChat({'name': this.username, 'msg': this.messageText});
   }
 
   getTest() {
 
     this.appService.getMessage().subscribe(data => console.log(data));
+  }
+
+  updateChat(msg) {
+    console.log(msg);
+    this.chatMessages.push(msg);
   }
 
 }
