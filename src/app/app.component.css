@@ -1,4 +1,46 @@
-button {
+.chat-container {
+    height: calc(100vh - 50px);
+    width: calc(50vw);
+    border: 1px solid black;
+    margin: auto;
+}
+
+.chat-body {
+    height: calc(100% - 50px);
+    padding: 0 10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.chat-footer {
+    border-top: 1px solid black;
     height: 50px;
-    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-footer button {
+    width: 10%;
+}
+
+.chat-footer input {
+    width: 80%;
+}
+
+.message {
+
+}
+
+.message.message-in {
+    
+}
+
+.message.message-out {
+    text-align-last: end;
+}
+
+.message-text {
+    
 }

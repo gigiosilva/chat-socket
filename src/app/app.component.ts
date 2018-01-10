@@ -22,7 +22,6 @@ export class AppComponent {
     }
 
     this.appService.sendMessage(JSON.stringify(aog));
-    //this.appService.msgPost(livro);
   }
 
   getTest() {
