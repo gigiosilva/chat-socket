@@ -3,14 +3,14 @@
 <button (click)="getTest()">Get</button> -->
 <div class="chat-container">
     <div class="chat-body">
-        <div class="message-container">
+        <div class="message-container" *ngFor="let chatMessage of chatMessages; let i = index">
             <div class="message message-in">
-                <span class="message-text">Testanado ma oe é minha msg</span>
+                <span class="message-text">{{ chatMessage.name }}: {{ chatMessage.text }}</span>
             </div>
         </div>
     </div>
     <div class="chat-footer">
-        <input type="text" name="message" id="message">
-        <button (click)="enviarTest()">Send</button>
+        <input [(ngModel)]="messageText" type="text" name="message" id="message">
+        <button (click)="sendMessage()">Send</button>
     </div>
 </div>

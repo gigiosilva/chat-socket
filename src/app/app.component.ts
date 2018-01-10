@@ -8,27 +8,29 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  chatMessages: Object[];
+  messageText: string;
+  username: string;
 
   constructor(private appService: AppService) {
-    this.appService.getMessage().subscribe(data => console.log(data));
+    this.appService.getMessage().subscribe(data => this.chatMessages.push(data));
     this.appService.getUpdate().subscribe(data => console.log(data));
   }
 
-  enviarTest() {
-    let aog = {
-      titulo: "teste",
-      descricao: "ata",
-      time: 100
-    }
+  ngOnInit() {
 
-    this.appService.sendMessage(JSON.stringify(aog));
+    this.username = prompt("Please enter your name");
+    this.appService.join(this.username);
+  }
+
+  sendMessage() {
+
+    this.appService.sendMessage(JSON.stringify(this.messageText));
   }
 
   getTest() {
+
     this.appService.getMessage().subscribe(data => console.log(data));
   }
 
-  connect() {
-    this.appService.join("Giovani");
-  }
 }
