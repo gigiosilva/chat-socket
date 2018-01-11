@@ -31,7 +31,7 @@ export class AppComponent {
   }
 
   updateChat(msg) {
-    console.log(msg);
+
     this.chatMessages.push(msg);
   }
 
