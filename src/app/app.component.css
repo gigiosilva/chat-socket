@@ -1,8 +1,9 @@
 .chat-container {
-    height: calc(100vh - 50px);
+    height: calc(100vh - 20px);
     width: calc(50vw);
-    border: 1px solid black;
-    margin: auto;
+    border-radius: 3px;
+    margin: 10px auto;
+    box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.44);
 }
 
 .chat-body {
@@ -11,10 +12,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    background-color: #e5ddd5ad;
 }
 
 .chat-footer {
-    border-top: 1px solid black;
     height: 50px;
     display: flex;
     align-items: center;
@@ -22,7 +23,7 @@
 }
 
 .chat-footer button {
-    width: 10%;
+    width: 13%;
 }
 
 .chat-footer input {
@@ -30,17 +31,72 @@
 }
 
 .message {
+    display: flex;
+    padding-bottom: 5px;
+}
 
+.bubble {
+    padding: 6px 0 8px 0;
+    padding-left: 9px;
+    padding-right: 7px;
+    max-width: 64%;
+    min-width: 110px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 1px 0.5px rgba(0,0,0,0.13);
+    word-wrap: break-word;
+}
+
+.message-in > .bubble {
+    background: white;
+}
+
+.message-out > .bubble {
+    background: rgb(118, 255, 164);
+}
+
+.message-server > .bubble {
+    background: rgba(225,245,254,0.92);
+    font-family: "Open Sans",sans-serif;
+    font-size: 12px;
+    color: #262626;
 }
 
 .message.message-in {
-    
+    justify-content: flex-start;
 }
 
 .message.message-out {
-    text-align-last: end;
+    justify-content: flex-end;
+}
+
+.message.message-server {
+    justify-content: center;
 }
 
 .message-text {
-    
+    font-family: "Open Sans",sans-serif;
+    font-size: 13.6px;
+    line-height: 19px;
+    color: #262626;
+}
+
+.message-name {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+
+@media (max-width: 768px){
+
+    .chat-container {
+        height: 100vh;
+        width: 100vw;
+        border: 0;
+        margin: 0;
+    }
+
 }

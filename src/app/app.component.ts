@@ -14,7 +14,7 @@ export class AppComponent {
 
   constructor(private appService: AppService) {
     this.appService.getMessage().subscribe(data => this.updateChat(data));
-    this.appService.getUpdate().subscribe(data => console.log(data));
+    this.appService.getUpdate().subscribe(data => this.updateChat(data));
   }
 
   ngOnInit() {
@@ -26,12 +26,8 @@ export class AppComponent {
   sendMessage() {
 
     this.appService.sendMessage(this.messageText);
-    this.updateChat({'name': this.username, 'msg': this.messageText});
-  }
-
-  getTest() {
-
-    this.appService.getMessage().subscribe(data => console.log(data));
+    this.updateChat({name: this.username, msg: this.messageText, external: false});
+    this.messageText = "";
   }
 
   updateChat(msg) {

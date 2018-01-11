@@ -1,16 +1,15 @@
-<!-- <button (click)="connect()">Connect</button>
-<button (click)="enviarTest()">Send</button>
-<button (click)="getTest()">Get</button> -->
 <div class="chat-container">
     <div class="chat-body">
-        <div class="message-container" *ngFor="let chatMessage of chatMessages; let i = index">
-            <div class="message message-in">
-                <span class="message-text">{{ chatMessage.name }}: {{ chatMessage.msg }}</span>
+        <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server}">
+            <div class="bubble">
+                <span *ngIf="!chatMessage.server && chatMessage.external" class="message-name">{{ chatMessage.name }}</span>
+                <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
+                <span *ngIf="chatMessage.server">{{ chatMessage.msg }}</span>
             </div>
         </div>
     </div>
     <div class="chat-footer">
-        <input [(ngModel)]="messageText" type="text" name="message" id="message">
+        <input [(ngModel)]="messageText" (keyup.enter)="sendMessage()" type="text" name="message" id="message">
         <button (click)="sendMessage()">Send</button>
     </div>
 </div>

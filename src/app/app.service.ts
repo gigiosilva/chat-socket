@@ -27,7 +27,7 @@ export class AppService {
   }
 
   getUpdate() {
-    return this.socket.fromEvent<any>("update");
+    return this.socket.fromEvent<any>("update").map(data => JSON.parse(data));
   }
 
   close() {
