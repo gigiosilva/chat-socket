@@ -1,5 +1,7 @@
+import { Component, AfterViewChecked, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
 import { AppService } from './app.service';
-import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,8 @@ export class AppComponent {
   chatMessages: Object[] = [];
   messageText: string;
   username: string;
+
+  @ViewChild('bodyContainer') private bodyContainer: ElementRef;
 
   constructor(private appService: AppService) {
     this.appService.getMessage().subscribe(data => this.updateChat(data));
@@ -24,7 +28,6 @@ export class AppComponent {
   }
 
   sendMessage() {
-
     this.appService.sendMessage(this.messageText);
     this.updateChat({name: this.username, msg: this.messageText, external: false});
     this.messageText = "";
@@ -33,6 +36,13 @@ export class AppComponent {
   updateChat(msg) {
 
     this.chatMessages.push(msg);
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      Observable.timer(100).subscribe(() => this.bodyContainer.nativeElement.scrollTop = this.bodyContainer.nativeElement.scrollHeight);
+    } catch(err) { }                 
   }
 
 }
