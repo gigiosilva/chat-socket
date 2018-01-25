@@ -66,7 +66,6 @@ export class AppComponent {
   }
 
   sendMessage() {
-
     if(this.messageText.length > 0) {
       this.appService.sendMessage(this.messageText);
       this.updateChat({name: this.username, msg: this.messageText, external: false});
@@ -75,7 +74,6 @@ export class AppComponent {
   }
 
   updateChat(msg) {
-
     if(this.connected) {
       this.chatMessages.push(msg);
       if(!this.windowActivated) this.addIconBadge();
@@ -90,13 +88,11 @@ export class AppComponent {
   }
 
   addIconBadge() {
-    
     this.notReadMsg += 1;
     this.favico.badge(this.notReadMsg);
   }
 
   removeIconBadge() {
-
     this.notReadMsg = 0;
     this.favico.reset();
   }
