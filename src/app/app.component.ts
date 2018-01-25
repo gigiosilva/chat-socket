@@ -45,7 +45,8 @@ export class AppComponent {
 
     this.username = localStorage.getItem('user');
 
-    if(this.username === undefined) {
+    if(this.username === null) {
+      console.log('entrou')
       this.username = prompt("Please enter your name:");
       if(this.username !== null) {
         this.joinChat();
