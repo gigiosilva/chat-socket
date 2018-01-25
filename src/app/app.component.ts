@@ -18,7 +18,7 @@ export class AppComponent {
   connected: boolean;
   notReadMsg: number = 0;
   favico: any;
-  windowActivated: boolean;
+  windowActivated: boolean = true;
 
   @ViewChild('bodyContainer') private bodyContainer: ElementRef;
 
@@ -43,14 +43,25 @@ export class AppComponent {
         animation:'none'
     });
 
-    this.username = prompt("Please enter your name:");
-    if(this.username !== null) {
-      this.connected = true;
-      this.appService.join(this.username);
+    this.username = localStorage.getItem('user');
+
+    if(this.username === undefined) {
+      this.username = prompt("Please enter your name:");
+      if(this.username !== null) {
+        this.joinChat();
+      } else {
+        this.connected = false;
+        this.chatMessages.push({msg: "Not connected, refresh the page and enter a name to connect to the chat", server: true});
+      }
     } else {
-      this.connected = false;
-      this.chatMessages.push({msg: "Not connected, refresh the page and enter a name to connect to the chat", server: true});
+      this.joinChat();
     }
+  }
+
+  joinChat() {
+    localStorage.setItem('user', this.username);
+    this.connected = true;
+    this.appService.join(this.username);
   }
 
   sendMessage() {
