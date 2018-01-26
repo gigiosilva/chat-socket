@@ -1,14 +1,48 @@
 const express = require('express');
 const app = express();
-const path = require('path');
-// Run the app by serving the static files
-// in the dist directory
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const cors = require('cors');
+
+let clients = {};
+let lastMsgName;
+
+app.use(cors());
+
 app.use(express.static(__dirname + '/dist'));
-// Start the app by listening on the default
-// Heroku port
-app.listen(process.env.PORT || 8080);
-// For all GET requests, send back index.html
-// so that PathLocationStrategy can be used
+
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+    res.sendFile(__dirname + '/dist/index.html');
+});
+
+io.on("connection", function (client) {
+    
+    console.log(client.id);
+
+    client.on("join", function(name){
+        console.log("Joined: " + name);
+        clients[client.id] = name;
+        client.emit("update", JSON.stringify({msg: `You are connected to the server as ${name}`, server: true}));
+        client.broadcast.emit("update", JSON.stringify({msg: `${name} has joined the server`, server: true}));
+    });
+    
+    client.on("send", function(msg){
+
+        let continuation = lastMsgName == clients[client.id] ? true : false;
+
+        lastMsgName = clients[client.id];
+
+        client.broadcast.emit("chat", JSON.stringify({name: clients[client.id], msg: msg, external: true, continuation: continuation}));
+    });
+    
+    client.on("disconnect", function(){
+        console.log("Disconnected: " + clients[client.id]);
+        io.emit("update", JSON.stringify({msg: `${clients[client.id]} has left the server`, server: true}));
+    });
+});
+
+const port = process.env.PORT || 3000;
+
+http.listen(port, function(){
+  console.log(`Running on port ${port}`);
 });
