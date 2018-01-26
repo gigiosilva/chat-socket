@@ -2,8 +2,12 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const cors = require('cors');
 
-var clients = {};
+let clients = {};
+let lastMsgName;
+
+app.use(cors());
 
 app.use(express.static(__dirname + '/dist'));
 
@@ -24,7 +28,11 @@ io.on("connection", function (client) {
     
     client.on("send", function(msg){
 
-        client.broadcast.emit("chat", JSON.stringify({name: clients[client.id], msg: msg, external: true}));
+        let continuation = lastMsgName == clients[client.id] ? true : false;
+
+        lastMsgName = clients[client.id];
+
+        client.broadcast.emit("chat", JSON.stringify({name: clients[client.id], msg: msg, external: true, continuation: continuation}));
     });
     
     client.on("disconnect", function(){
