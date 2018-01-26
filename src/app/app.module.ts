@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
+import { ChatService } from './chat.service';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { HttpModule } from '@angular/http';
 
@@ -18,7 +19,10 @@ const config: SocketIoConfig = { url: 'http://chat-in.herokuapp.com', options: {
     HttpModule,
     FormsModule
   ],
-  providers: [AppService],
+  providers: [
+    AppService,
+    ChatService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
