@@ -5,7 +5,7 @@ const io = require('socket.io')(http);
 const cors = require('cors');
 
 let clients = {};
-let lastMsgName;
+let lastMsgClient;
 
 app.use(cors());
 
@@ -16,8 +16,6 @@ app.get('/*', function(req, res) {
 });
 
 io.on("connection", function (client) {
-    
-    console.log(client.id);
 
     client.on("join", function(name){
         console.log("Joined: " + name);
@@ -28,9 +26,9 @@ io.on("connection", function (client) {
     
     client.on("send", function(msg){
 
-        let continuation = lastMsgName == clients[client.id] ? true : false;
+        let continuation = lastMsgClient == client.id ? true : false;
 
-        lastMsgName = clients[client.id];
+        lastMsgClient = client.id;
 
         client.broadcast.emit("chat", JSON.stringify({name: clients[client.id], msg: msg, external: true, continuation: continuation}));
     });
@@ -38,6 +36,7 @@ io.on("connection", function (client) {
     client.on("disconnect", function(){
         console.log("Disconnected: " + clients[client.id]);
         io.emit("update", JSON.stringify({msg: `${clients[client.id]} has left the server`, server: true}));
+        delete clients[client.id];
     });
 });
 

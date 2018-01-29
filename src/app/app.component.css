@@ -44,6 +44,10 @@
 
 .message {
     display: flex;
+    padding-bottom: 10px;
+}
+
+.message.continuation {
     padding-bottom: 5px;
 }
 

@@ -6,7 +6,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class ChatService {
-  private url = 'http://localhost:5000';  
+  private url = 'http://localhost:3000';  
   private socket;
 
   constructor() { }
