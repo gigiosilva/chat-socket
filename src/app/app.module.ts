@@ -7,7 +7,7 @@ import { ChatService } from './chat.service';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { HttpModule } from '@angular/http';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: 'https://chat-in.herokuapp.com', options: {} };
 
 @NgModule({
   declarations: [

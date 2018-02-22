@@ -22,6 +22,7 @@ io.on("connection", function (client) {
         clients[client.id] = name;
         client.emit("update", JSON.stringify({msg: `You are connected to the server as ${name}`, server: true}));
         client.broadcast.emit("update", JSON.stringify({msg: `${name} has joined the server`, server: true}));
+        console.log(clients);
     });
     
     client.on("send", function(msg){
@@ -35,7 +36,10 @@ io.on("connection", function (client) {
     
     client.on("disconnect", function(){
         console.log("Disconnected: " + clients[client.id]);
-        io.emit("update", JSON.stringify({msg: `${clients[client.id]} has left the server`, server: true}));
+        if(clients[client.id] !== undefined) {
+            io.emit("update", JSON.stringify({msg: `${clients[client.id]} has left the server`, server: true}));
+        }
+        console.log(clients);
         delete clients[client.id];
     });
 });
