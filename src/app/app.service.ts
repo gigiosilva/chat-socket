@@ -30,6 +30,10 @@ export class AppService {
     return this.socket.fromEvent<any>("update").map(data => JSON.parse(data));
   }
 
+  getUsers() {
+    return this.socket.fromEvent<any>("users").map(data => JSON.parse(data));
+  }
+
   close() {
     this.socket.disconnect()
   }

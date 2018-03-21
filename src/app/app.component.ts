@@ -25,6 +25,7 @@ export class AppComponent {
   constructor(private appService: AppService) {
     this.appService.getMessage().subscribe(data => this.updateChat(data));
     this.appService.getUpdate().subscribe(data => this.updateChat(data));
+    this.appService.getUsers().subscribe(data => this.updateUsers(data));
   }
 
   @HostListener('window:focus', ['$event'])
@@ -79,6 +80,10 @@ export class AppComponent {
       if(!this.windowActivated) this.addIconBadge();
       this.scrollToBottom();
     }
+  }
+
+  updateUsers(users) {
+    console.log(users);
   }
 
   scrollToBottom(): void {
