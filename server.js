@@ -39,8 +39,8 @@ io.on("connection", function (client) {
         if(clients[client.id] !== undefined) {
             io.emit("update", JSON.stringify({msg: `${clients[client.id]} has left the server`, server: true}));
         }
-        io.sockets.emit('users', JSON.stringify({users: clients}));
         delete clients[client.id];
+        io.sockets.emit('users', JSON.stringify({users: clients}));
     });
 });
 
