@@ -1,19 +1,24 @@
-<div class="chat-container">
-    <div #bodyContainer class="chat-body-container">
-        <div class="chat-body">
-            <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server, 'continuation': chatMessage.continuation}">
-                <div class="bubble">
-                    <span *ngIf="!chatMessage.server && chatMessage.external && !chatMessage.continuation" class="message-name">{{ chatMessage.name }}</span>
-                    <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
-                    <span *ngIf="chatMessage.server">{{ chatMessage.msg }}</span>
+<div class="container">
+    <div class="chat-users">
+        
+    </div>
+    <div class="chat-container">
+        <div #bodyContainer class="chat-body-container">
+            <div class="chat-body">
+                <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server, 'continuation': chatMessage.continuation}">
+                    <div class="bubble">
+                        <span *ngIf="!chatMessage.server && chatMessage.external && !chatMessage.continuation" class="message-name">{{ chatMessage.name }}</span>
+                        <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
+                        <span *ngIf="chatMessage.server">{{ chatMessage.msg }}</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="chat-footer">
-        <input [(ngModel)]="messageText" (keyup.enter)="sendMessage()" type="text" name="message" id="message">
-        <!-- <div [(ngModel)]="messageText" (keyup.enter)="sendMessage()" contentEditable="true" class="input-text"></div> -->
-        <!-- <div contenteditable="true" [textContent]="messageText" (keyup.enter)="sendMessage($event)" (input)="messageText=$event.target.textContent" class="input-text"></div> -->
-        <button (click)="sendMessage()">Send</button>
+        <div class="chat-footer">
+            <input [(ngModel)]="messageText" (keyup.enter)="sendMessage()" type="text" name="message" id="message">
+            <!-- <div [(ngModel)]="messageText" (keyup.enter)="sendMessage()" contentEditable="true" class="input-text"></div> -->
+            <!-- <div contenteditable="true" [textContent]="messageText" (keyup.enter)="sendMessage($event)" (input)="messageText=$event.target.textContent" class="input-text"></div> -->
+            <button (click)="sendMessage()">Send</button>
+        </div>
     </div>
 </div>
