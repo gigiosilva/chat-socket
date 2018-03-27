@@ -32,13 +32,7 @@
     /* height: 20px; */
 }
 
-.chat-footer input {
-    width: 80%;
-}
-
-.chat-footer div.input-text {
-    display: inline-block;
-    border: solid 1px rgba(99, 99, 99, 0.65);
+.chat-footer textarea {
     width: 80%;
 }
 
@@ -132,6 +126,14 @@
     line-height: 22px;
 }
 
+.message-text-area {
+    padding: 0;
+    margin: 0;
+    overflow-y: inherit;
+    height: 22px;
+    min-height: 0;
+}
+
 *::-webkit-scrollbar {
     width: 6px !important;
     height: 6px !important
@@ -155,15 +157,11 @@
         margin: 0;
     }
 
-    .chat-footer button {
-        height: 24px;
+    .message-text-area {
+        height: 25px;
     }
 
-    .chat-footer input {
-        font-size: 16px;
-    }
-
-    .chat-footer div.input-text {
+    .chat-footer textarea {
         font-size: 16px;
     }
 

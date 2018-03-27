@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { AppService } from './app.service';
 
 declare var Favico:any;
+declare var $: any;
+declare var M: any;
 
 @Component({
   selector: 'app-root',
@@ -106,6 +108,10 @@ export class AppComponent {
   removeIconBadge() {
     this.notReadMsg = 0;
     this.favico.reset();
+  }
+
+  resizeTextArea() {
+    M.textareaAutoResize($('#messageText'));
   }
 
 }

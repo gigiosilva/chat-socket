@@ -13,7 +13,12 @@
         </div>
     </div>
     <div class="chat-footer">
-        <input [(ngModel)]="messageText" (keyup.enter)="sendMessage()" type="text" name="message" id="message">
-        <button (click)="sendMessage()">Send</button>
+        <textarea [(ngModel)]="messageText" id="messageText" (keyup.enter)="sendMessage()" (change)="resizeTextArea()" class="materialize-textarea message-text-area"></textarea>
+        <!-- <input [(ngModel)]="messageText" (keyup.enter)="sendMessage()" type="text" name="message" id="message"> -->
+        <!-- <button (click)="sendMessage()">Send</button> -->
+        <a (click)="sendMessage()" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">send</i></a>
+        <!-- <button (click)="sendMessage()" class="btn waves-effect waves-light" type="submit" name="action">
+            <i class="material-icons right">send</i>
+        </button> -->
     </div>
 </div>
