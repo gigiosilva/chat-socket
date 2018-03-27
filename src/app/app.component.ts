@@ -1,5 +1,6 @@
 import { Component, AfterViewChecked, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import * as moment from 'moment';
 
 import { AppService } from './app.service';
 
@@ -68,14 +69,17 @@ export class AppComponent {
 
   sendMessage() {
     if(this.messageText.length > 0) {
+      let time = moment().format("HH:mm");
       this.appService.sendMessage(this.messageText);
-      this.updateChat({name: this.username, msg: this.messageText, external: false});
+      this.updateChat({name: this.username, msg: this.messageText, external: false, time: time});
       this.messageText = "";
     }
   }
 
   updateChat(msg) {
     if(this.connected) {
+      let time = moment().format("HH:mm");
+      msg.time = time;
       this.chatMessages.push(msg);
       if(!this.windowActivated) this.addIconBadge();
       this.scrollToBottom();

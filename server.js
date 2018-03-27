@@ -3,6 +3,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const cors = require('cors');
+const moment = require('moment');
 
 let clients = {};
 let lastMsgClient;
@@ -26,9 +27,7 @@ io.on("connection", function (client) {
     });
     
     client.on("send", function(msg){
-
         let continuation = lastMsgClient == client.id ? true : false;
-
         lastMsgClient = client.id;
 
         client.broadcast.emit("chat", JSON.stringify({name: clients[client.id], msg: msg, external: true, continuation: continuation}));
