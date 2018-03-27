@@ -70,8 +70,10 @@ export class AppComponent {
   sendMessage() {
     if(this.messageText.length > 0) {
       let time = moment().format("HH:mm");
+      let continuation = false;
       this.appService.sendMessage(this.messageText);
-      this.updateChat({name: this.username, msg: this.messageText, external: false, time: time});
+      if(this.chatMessages[this.chatMessages.length - 1]["name"] == this.username) continuation = true;
+      this.updateChat({name: this.username, msg: this.messageText, external: false, time: time, continuation: continuation});
       this.messageText = "";
     }
   }

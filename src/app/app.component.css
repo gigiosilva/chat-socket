@@ -44,12 +44,23 @@
 
 .message {
     display: flex;
+}
+
+.message:last-child {
     padding-bottom: 10px;
 }
 
+.message:not(.continuation) {
+    display: flex;
+    padding-top: 10px;
+}
+
 .message.continuation {
-    /* padding-top: 5px;
-    padding-bottom: 5px; */
+    padding-top: 5px;
+}
+
+.message-in + .message-out {
+    padding-top: 10px;
 }
 
 .bubble {
