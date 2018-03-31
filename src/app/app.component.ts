@@ -69,7 +69,8 @@ export class AppComponent {
     this.appService.join(this.username);
   }
 
-  sendMessage() {
+  sendMessage(e) {
+    e.preventDefault();
     if(this.messageText.length > 0) {
       let time = moment().format("HH:mm");
       let continuation = false;

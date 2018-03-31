@@ -1,6 +1,6 @@
 <div class="chat-container">
   <div class="chat-header">
-    <h3>Chat In</h3>
+    <h5>Chat In</h5>
   </div>
   <div #bodyContainer class="chat-body-container">
     <div class="chat-body">
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="chat-footer">
-    <textarea placeholder="Type a message" [(ngModel)]="messageText" id="messageText" (keyup.enter)="sendMessage()" (change)="resizeTextArea()" class="materialize-textarea message-text-area"></textarea>
+    <textarea placeholder="Type a message" [(ngModel)]="messageText" id="messageText" (keydown.enter)="sendMessage($event);" (change)="resizeTextArea()" class="materialize-textarea message-text-area"></textarea>
     <a (click)="sendMessage()" class="btn-floating btn-small waves-effect waves-light">
       <i class="material-icons">send</i>
     </a>
