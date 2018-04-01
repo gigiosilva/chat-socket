@@ -69,7 +69,7 @@ export class AppComponent {
     this.appService.join(this.username);
   }
 
-  sendMessage(e, input) {
+  sendMessage(el, e, input) {
     if(input == "key") e.preventDefault();
     if(this.messageText.length > 0) {
       let time = moment().format("HH:mm");
@@ -78,6 +78,7 @@ export class AppComponent {
       if(this.chatMessages[this.chatMessages.length - 1]["name"] == this.username) continuation = true;
       this.updateChat({name: this.username, msg: this.messageText, external: false, time: time, continuation: continuation});
       this.messageText = "";
+      el.removeAttribute("style");
     }
   }
 
