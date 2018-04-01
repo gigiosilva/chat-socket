@@ -1,19 +1,26 @@
-<div class="chat-container">
+<div class="chat-background">
+  <div class="chat-container">
+    <div class="chat-header">
+      <span class="chat-title">Chat In</span>
+    </div>
     <div #bodyContainer class="chat-body-container">
-        <div class="chat-body">
-            <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server, 'continuation': chatMessage.continuation}">
-                <div class="bubble">
-                    <span *ngIf="!chatMessage.server && chatMessage.external && !chatMessage.continuation" class="message-name">{{ chatMessage.name }}</span>
-                    <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
-                    <span *ngIf="chatMessage.server">{{ chatMessage.msg }}</span>
-                    <span class="time-space"></span>
-                    <span *ngIf="!chatMessage.server" class="message-time">{{ chatMessage.time }}</span>
-                </div>
-            </div>
+      <div class="chat-body">
+        <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server, 'continuation': chatMessage.continuation}">
+          <div class="bubble">
+            <span *ngIf="!chatMessage.server && chatMessage.external && !chatMessage.continuation" class="message-name">{{ chatMessage.name }}</span>
+            <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
+            <span *ngIf="chatMessage.server">{{ chatMessage.msg }}</span>
+            <span class="time-space"></span>
+            <span *ngIf="!chatMessage.server" class="message-time">{{ chatMessage.time }}</span>
+          </div>
         </div>
+      </div>
     </div>
     <div class="chat-footer">
-        <input [(ngModel)]="messageText" (keyup.enter)="sendMessage()" type="text" name="message" id="message">
-        <button (click)="sendMessage()">Send</button>
+      <textarea #textArea placeholder="Type a message" [(ngModel)]="messageText" id="messageText" (keydown.enter)="sendMessage(textArea, $event,'key');" class="materialize-textarea message-text-area"></textarea>
+      <a (click)="sendMessage(textArea)" class="btn-floating btn-small waves-effect waves-light">
+        <i class="material-icons">send</i>
+      </a>
     </div>
+  </div>
 </div>

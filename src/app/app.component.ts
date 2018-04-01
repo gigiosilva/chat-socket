@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { AppService } from './app.service';
 
 declare var Favico:any;
+declare var $: any;
+declare var M: any;
 
 @Component({
   selector: 'app-root',
@@ -67,7 +69,8 @@ export class AppComponent {
     this.appService.join(this.username);
   }
 
-  sendMessage() {
+  sendMessage(el, e?, input?) {
+    if(input == "key") e.preventDefault();
     if(this.messageText.length > 0) {
       let time = moment().format("HH:mm");
       let continuation = false;
@@ -75,6 +78,7 @@ export class AppComponent {
       if(this.chatMessages[this.chatMessages.length - 1]["name"] == this.username) continuation = true;
       this.updateChat({name: this.username, msg: this.messageText, external: false, time: time, continuation: continuation});
       this.messageText = "";
+      el.removeAttribute("style");
     }
   }
 
@@ -107,5 +111,4 @@ export class AppComponent {
     this.notReadMsg = 0;
     this.favico.reset();
   }
-
 }
