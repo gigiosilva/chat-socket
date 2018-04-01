@@ -69,7 +69,7 @@ export class AppComponent {
     this.appService.join(this.username);
   }
 
-  sendMessage(el, e, input) {
+  sendMessage(el, e?, input?) {
     if(input == "key") e.preventDefault();
     if(this.messageText.length > 0) {
       let time = moment().format("HH:mm");
