@@ -69,8 +69,8 @@ export class AppComponent {
     this.appService.join(this.username);
   }
 
-  sendMessage(e) {
-    e.preventDefault();
+  sendMessage(e, input) {
+    if(input == "key") e.preventDefault();
     if(this.messageText.length > 0) {
       let time = moment().format("HH:mm");
       let continuation = false;
@@ -110,9 +110,4 @@ export class AppComponent {
     this.notReadMsg = 0;
     this.favico.reset();
   }
-
-  resizeTextArea() {
-    M.textareaAutoResize($('#messageText'));
-  }
-
 }
