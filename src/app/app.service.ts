@@ -31,7 +31,7 @@ export class AppService {
   }
 
   getUsers() {
-    return this.socket.fromEvent<any>("users").map(data => JSON.parse(data));
+    return this.socket.fromEvent<any>("users").map(data => JSON.parse(data).users);
   }
 
   close() {
