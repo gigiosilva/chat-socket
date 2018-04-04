@@ -1,5 +1,5 @@
 .chat-container {
-    width: calc(50vw);
+    width: calc(58vw);
     border-radius: 3px;
     margin: 10px auto;
     box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.44);
@@ -9,8 +9,50 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    border: 1px solid #bdbdbd;
+}
+
+.chat-users {
+    background: #f7f7f7;
+    flex: 25%;
+    border-right: 1px solid #bdbdbd;
+    overflow-y: auto;
+}
+
+.user-container {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 100%;
+    display: flex;
+    padding-left: 8%;
+    align-items: center;
+}
+
+.user-icon {
+    height: 42px;
+}
+
+.collection {
+    margin: 0;
+}
+
+.collection .collection-item.avatar {
+    min-height: 65px;
+    padding: 0;
+}
+
+.title {
+    width: 70%;
+    overflow-wrap: break-word;
+    padding-left: 8%;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    flex: 75%;
 }
 
 .chat-body-container {
@@ -76,6 +118,7 @@
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #80808040;
+    position: relative;
 }
 
 .chat-header .chat-title {
@@ -193,8 +236,48 @@
     background: rgba(255,255,255,0.08)
 }
 
+.menu-button {
+    position: absolute;
+    left: 15px;
+    color: black;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+}
+
+.mobile-menu {
+    position: absolute;
+    width: 200px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #f7f7f7;
+    border-right: 1px solid #e2e2e2;
+    transform: translatex(-200px);
+    transition: ease 500ms;
+}
+
+.mobile-menu.open {
+    transform: translatex(0);
+}
+
+@media (max-width: 840px){
+    .chat-container {
+        width: calc(85vw);
+    }
+}
+
 
 @media (max-width: 768px){
+
+    .menu-button {
+        display: inherit;
+    }
+
+    .chat-users {
+        display: none;
+    }
 
     .chat-container {
         height: 100vh;
@@ -216,4 +299,7 @@
         font-size: 16px;
     }
 
+    .chat-body-container, .chat-users {
+        -webkit-overflow-scrolling: touch;
+    }
 }

@@ -16,12 +16,14 @@ declare var M: any;
 export class AppComponent {
   title = 'app';
   chatMessages: Object[] = [];
+  usersOnline: Object[] = [];
   messageText: string;
   username: string;
   connected: boolean;
   notReadMsg: number = 0;
   favico: any;
   windowActivated: boolean = true;
+  showMenuMobile: boolean = false;
 
   @ViewChild('bodyContainer') private bodyContainer: ElementRef;
 
@@ -93,7 +95,8 @@ export class AppComponent {
   }
 
   updateUsers(users) {
-    console.log(users);
+    this.usersOnline = [];
+    Object.keys(users).forEach(key=>this.usersOnline.push({name: users[key]}));
   }
 
   scrollToBottom(): void {
