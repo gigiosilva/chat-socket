@@ -95,6 +95,7 @@ export class AppComponent {
   }
 
   updateUsers(users) {
+    this.usersOnline = [];
     Object.keys(users).forEach(key=>this.usersOnline.push({name: users[key]}));
   }
 
