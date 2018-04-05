@@ -19,7 +19,7 @@
             </div>
             <div #bodyContainer class="chat-body-container" (click)="showMenuMobile=false">
                 <div class="chat-body">
-                    <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server, 'continuation': chatMessage.continuation}">
+                    <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server, 'continuation': chatMessage.continuation, 'last-message': chatMessages.length == i+1}">
                         <div class="bubble">
                             <span *ngIf="!chatMessage.server && chatMessage.external && !chatMessage.continuation" class="message-name">{{ chatMessage.name }}</span>
                             <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
