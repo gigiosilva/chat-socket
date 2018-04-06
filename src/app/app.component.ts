@@ -101,7 +101,7 @@ export class AppComponent {
 
   scrollToBottom(): void {
     try {
-      Observable.timer(100).subscribe(_=> document.querySelector(".last-message").scrollIntoView({behavior: "smooth"}));
+      Observable.timer(100).subscribe(_=> document.querySelector(".last-message").scrollIntoView({block: "end", behavior: "smooth"}));
     } catch(err) { }                 
   }
 
