@@ -25,7 +25,10 @@
                             <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
                             <span *ngIf="chatMessage.server">{{ chatMessage.msg }}</span>
                             <span class="time-space"></span>
-                            <span *ngIf="!chatMessage.server" class="message-time">{{ chatMessage.time }}</span>
+                            <span *ngIf="!chatMessage.server" class="message-time">
+                              {{ chatMessage.time }}
+                              <i *ngIf="!chatMessage.external" class="material-icons" [ngClass]="{'sent-check': chatMessage.seen}">done_all</i>
+                            </span>
                         </div>
                     </div>
                 </div>

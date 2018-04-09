@@ -25,14 +25,17 @@ io.on("connection", function (client) {
         client.broadcast.emit("update", JSON.stringify({msg: `${name} has joined the server`, server: true}));
         io.sockets.emit('users', JSON.stringify({users: clients}));
     });
-    
+
     client.on("send", function(msg){
         let continuation = lastMsgClient == client.id ? true : false;
         lastMsgClient = client.id;
-
         client.broadcast.emit("chat", JSON.stringify({name: clients[client.id], msg: msg, external: true, continuation: continuation}));
     });
-    
+
+    client.on("messages-checked", function(msg) {
+      client.broadcast.emit("messages-seen", JSON.stringify({msg: msg}));
+    });
+
     client.on("disconnect", function(){
         console.log("Disconnected: " + clients[client.id]);
         if(clients[client.id] !== undefined) {

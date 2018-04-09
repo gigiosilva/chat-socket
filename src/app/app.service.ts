@@ -22,6 +22,14 @@ export class AppService {
     this.socket.emit("send", msg);
   }
 
+  sendMessagesChecked(msg: any) {
+    this.socket.emit("messages-checked", msg);
+  }
+
+  getMessagesChecked() {
+    return this.socket.fromEvent<any>("messages-seen").map(data => JSON.parse(data));
+  }
+
   getMessage() {
     return this.socket.fromEvent<any>("chat").map(data => JSON.parse(data));
   }
