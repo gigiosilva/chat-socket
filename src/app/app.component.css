@@ -200,6 +200,14 @@
     font-family: sans-serif;
 }
 
+.message-time > i {
+  font-size: 18px;
+}
+
+.sent-check {
+  color: #1E90FF;
+}
+
 .message-text {
     font-family: "Open Sans",sans-serif;
     font-size: 13.6px;

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
 
 import { AppService } from './app.service';
+import { ChatMessage } from './chatMessage';
 
 declare var Favico:any;
 declare var $: any;
@@ -15,7 +16,7 @@ declare var M: any;
 })
 export class AppComponent {
   title = 'app';
-  chatMessages: Object[] = [];
+  chatMessages: ChatMessage[];
   usersOnline: Object[] = [];
   messageText: string;
   username: string;
@@ -31,12 +32,14 @@ export class AppComponent {
     this.appService.getMessage().subscribe(data => this.updateChat(data));
     this.appService.getUpdate().subscribe(data => this.updateChat(data));
     this.appService.getUsers().subscribe(data => this.updateUsers(data));
+    this.appService.getMessagesChecked().subscribe(data => this.updateMessagesSeen());
   }
 
   @HostListener('window:focus', ['$event'])
   onFocus(event: any): void {
     this.windowActivated = true;
     this.removeIconBadge();
+    this.appService.sendMessagesChecked('Hello World');
   }
 
   @HostListener('window:blur', ['$event'])
@@ -45,6 +48,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    this.chatMessages = [];
     this.favico = new Favico({
         animation:'none'
     });
@@ -58,7 +62,11 @@ export class AppComponent {
         this.joinChat();
       } else {
         this.connected = false;
-        this.chatMessages.push({msg: "Not connected, refresh the page and enter a name to connect to the chat", server: true});
+        let chatMessage = new ChatMessage;
+        chatMessage.msg = "Not connected, refresh the page and enter a name to connect to the chat";
+        chatMessage.server = true;
+
+        this.chatMessages.push(chatMessage);
       }
     } else {
       this.joinChat();
@@ -99,10 +107,14 @@ export class AppComponent {
     Object.keys(users).forEach(key=>this.usersOnline.push({name: users[key]}));
   }
 
+  updateMessagesSeen() {
+    this.chatMessages.map(chatMessage => chatMessage.seen = true);
+  }
+
   scrollToBottom(): void {
     try {
       Observable.timer(100).subscribe(_=> document.querySelector(".last-message").scrollIntoView({block: "end", behavior: "smooth"}));
-    } catch(err) { }                 
+    } catch(err) { }
   }
 
   addIconBadge() {
