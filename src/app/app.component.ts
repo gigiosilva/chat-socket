@@ -97,7 +97,11 @@ export class AppComponent {
       let time = moment().format("HH:mm");
       msg.time = time;
       this.chatMessages.push(msg);
-      if(!this.windowActivated) this.addIconBadge();
+      if(!this.windowActivated) {
+        this.addIconBadge();
+      } else {
+        this.appService.sendMessagesChecked('Hello World');
+      }
       this.scrollToBottom();
     }
   }
