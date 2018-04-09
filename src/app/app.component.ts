@@ -113,7 +113,7 @@ export class AppComponent {
 
   scrollToBottom(): void {
     try {
-      Observable.timer(100).subscribe(() => this.bodyContainer.nativeElement.scrollTop = this.bodyContainer.nativeElement.scrollHeight);
+      Observable.timer(100).subscribe(_=> document.querySelector(".last-message").scrollIntoView({block: "end", behavior: "smooth"}));
     } catch(err) { }
   }
 
