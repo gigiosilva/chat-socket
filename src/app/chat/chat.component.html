@@ -1,0 +1,56 @@
+<div class="chat-background">
+  <div class="chat-container">
+      <div class="chat-users">
+          <ul class="collection">
+              <li *ngFor="let user of usersOnline" class="collection-item avatar">
+                  <div class="user-container">
+                      <img src="../assets/user.png" alt="" class="user-icon">
+                      <span class="title">{{ user.name }}</span>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <div class="chat">
+          <div class="chat-header">
+              <a class="menu-button" (click)="showMenuMobile=!showMenuMobile">
+                  <i class="material-icons">dehaze</i>
+              </a>
+              <span class="chat-title">Chat In</span>
+          </div>
+          <div #bodyContainer class="chat-body-container" (click)="showMenuMobile=false">
+              <div class="chat-body">
+                  <div class="message" *ngFor="let chatMessage of chatMessages; let i = index" [ngClass]="{'message-in': chatMessage.external, 'message-out': !chatMessage.external, 'message-server': chatMessage.server, 'continuation': chatMessage.continuation, 'last-message': chatMessages.length == i+1}">
+                      <div class="bubble">
+                          <span *ngIf="!chatMessage.server && chatMessage.external && !chatMessage.continuation" class="message-name">{{ chatMessage.name }}</span>
+                          <span *ngIf="!chatMessage.server" class="message-text">{{ chatMessage.msg }}</span>
+                          <span *ngIf="chatMessage.server">{{ chatMessage.msg }}</span>
+                          <span class="time-space"></span>
+                          <span *ngIf="!chatMessage.server" class="message-time">
+                            {{ chatMessage.time }}
+                            <i *ngIf="!chatMessage.external" class="material-icons" [ngClass]="{'sent-check': chatMessage.seen}">done_all</i>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="chat-footer">
+              <textarea #textArea placeholder="Type a message" [(ngModel)]="messageText" id="messageText" (keydown.enter)="sendMessage(textArea, $event,'key');"
+                  class="materialize-textarea message-text-area"></textarea>
+              <a (click)="sendMessage(textArea)" class="btn-floating btn-small waves-effect waves-light">
+                  <i class="material-icons">send</i>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="mobile-menu" [class.open]="showMenuMobile">
+  <ul class="collection">
+      <li *ngFor="let user of usersOnline" class="collection-item avatar">
+          <div class="user-container">
+              <img src="../assets/user.png" alt="" class="user-icon">
+              <span class="title">{{ user.name }}</span>
+          </div>
+      </li>
+  </ul>
+</div>
