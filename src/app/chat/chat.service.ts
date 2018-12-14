@@ -7,7 +7,8 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class ChatService {
   // private url = 'https://chat-in.herokuapp.com';  
-  private url = 'http://localhost:3000';  
+  private url = 'https://chat-socket-node.azurewebsites.net';
+  // private url = 'http://localhost:3000';  
   private socket;
 
   constructor() {
