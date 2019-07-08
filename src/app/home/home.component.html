@@ -1,1 +1,23 @@
-<input [(ngModel)]="path" /><button (click)="goToPath()">Send</button>
+<body>
+    <main class="row center ">
+        <div class="card-panel grey lighten-5 z-depth-1">
+                <div>
+                    <a href="/"><img src="../assets/logo/logo.png"></a>
+                </div>
+                <div class="row center">
+                    <input class="center" [(ngModel)]="path" placeholder="your custom path here"/>
+                </div>
+                <div class="center">
+                    <button [disabled]="!path" class="btn-large waves-effect waves-light orange" (click)="goToPath()">Send</button>
+                </div>
+            </div>
+    </main>
+    <footer>
+        <div class="footer-copyright white lighten-5">
+            <div class="container center">
+                    &copy; 2019 Copyright <b>Gigio</b>
+            </div>
+        </div>
+    </footer>
+
+</body>
