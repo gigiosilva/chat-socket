@@ -1,22 +1,7 @@
 
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background-color: white;
-  }
-
-  body.margin {
-      padding: 30px;
-  }
-  
-  main {
-    flex: 1 0 auto;
-  }
-
-  img {
-    width: 90px;
-    height: 80px;
+img {
+    width: 300px;
+    height: 142px;
   }
 
   input {
@@ -27,3 +12,16 @@ body {
     box-sizing: inherit;
     width: 350px;    
   }
+
+  .center-align {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
